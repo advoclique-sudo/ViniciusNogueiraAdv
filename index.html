@@ -88,14 +88,14 @@ section{padding:84px 0}
 .top .btn{min-height:44px;padding:0 18px;font-size:.9rem}
 @media (max-width:560px){.top .btn span{display:none}.top .btn{width:44px;padding:0}}
 
-/* ---------- Hero (imagem de fundo) ---------- */
-/* TROCAR a foto: altere a URL em --hero-img. Foto: Unsplash (licença gratuita) */
-.hero{--hero-img:url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=70");
+/* ---------- Hero (foto de fundo) ---------- */
+/* TROCAR a foto: altere a URL em --hero-img. Foto: Unsplash (licença gratuita) — biblioteca jurídica */
+.hero{--hero-img:url("https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1920&q=75");
   position:relative;overflow:hidden;padding:110px 0 0;color:var(--white);
-  background:var(--navy-900) var(--hero-img) center 40%/cover no-repeat;background-blend-mode:luminosity}
-.hero::before{content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse at center,rgba(0,39,61,.72) 0%,rgba(0,39,61,.84) 60%,rgba(0,26,41,.93) 100%),
-             linear-gradient(0deg,rgba(0,26,41,.9) 0%,rgba(0,26,41,0) 40%)}
+  background:var(--navy-950) var(--hero-img) center 45%/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,26,41,.88) 0%,rgba(0,39,61,.78) 50%,rgba(0,26,41,.88) 100%),
+             linear-gradient(0deg,rgba(0,26,41,.95) 0%,rgba(0,26,41,0) 45%)}
 .hero > *{position:relative}
 .hero-grid{display:block}
 .hero-copy{max-width:780px;margin:0 auto;padding-bottom:20px;text-align:center}
@@ -108,8 +108,9 @@ section{padding:84px 0}
 .hero .micro{color:#AEBBC7}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 @media (max-width:640px){
-  .hero{padding-top:72px;background-position:70% center}
-  .hero::before{background:linear-gradient(180deg,rgba(0,26,41,.82) 0%,rgba(0,26,41,.92) 60%,rgba(0,26,41,.97) 100%)}
+  .hero{padding-top:72px}
+  .hero{background-position:62% center}
+  .hero::before{background:linear-gradient(180deg,rgba(0,26,41,.80) 0%,rgba(0,26,41,.86) 55%,rgba(0,26,41,.96) 100%)}
 }
 
 .strip{margin-top:72px;background:rgba(0,26,41,.72);backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.12);color:var(--white)}
@@ -152,7 +153,8 @@ section{padding:84px 0}
 .right-num{display:block;font-family:var(--serif);font-size:1rem;color:var(--slate);letter-spacing:.08em;margin-bottom:18px}
 .right-ico{width:42px;height:42px;border-radius:10px;background:var(--brass-soft);color:var(--navy-900);display:grid;place-items:center;margin-bottom:16px}
 .right-ico svg{width:22px;height:22px}
-.right h3{font-size:1.28rem;margin-bottom:6px}
+.right h3{font-size:1.28rem;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.right h3::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--navy-900)}
 .right p{font-size:.92rem;color:var(--muted);line-height:1.5}
 .quote{margin-top:44px;padding:30px 28px;border-left:3px solid var(--brass);background:var(--white);border-radius:0 var(--radius) var(--radius) 0;font-family:var(--serif);font-size:clamp(1.35rem,3vw,1.75rem);line-height:1.3;color:var(--navy-900);font-style:italic}
 
@@ -379,10 +381,10 @@ footer a:hover{color:var(--white)}
     </div>
 
     <div class="rights reveal">
-      <div class="right"><span class="right-num">01</span><h3>Horas extras</h3><p>Com adicional de no mínimo 50%, e reflexo em férias, 13º e FGTS.</p></div>
-      <div class="right"><span class="right-num">02</span><h3>FGTS e multa de 40%</h3><p>Depósito de 8% do salário todo mês. Na demissão sem justa causa, mais 40% sobre o total.</p></div>
-      <div class="right"><span class="right-num">03</span><h3>Férias + 1/3</h3><p>Vencidas e proporcionais. Férias que não foram tiradas no prazo podem ser devidas em dobro.</p></div>
-      <div class="right"><span class="right-num">04</span><h3>Danos morais</h3><p>Quando há assédio, humilhação ou desrespeito à dignidade no trabalho.</p></div>
+      <div class="right"><h3>Horas extras</h3><p>Com adicional de no mínimo 50%, e reflexo em férias, 13º e FGTS.</p></div>
+      <div class="right"><h3>FGTS e multa de 40%</h3><p>Depósito de 8% do salário todo mês. Na demissão sem justa causa, mais 40% sobre o total.</p></div>
+      <div class="right"><h3>Férias + 1/3</h3><p>Vencidas e proporcionais. Férias que não foram tiradas no prazo podem ser devidas em dobro.</p></div>
+      <div class="right"><h3>Danos morais</h3><p>Quando há assédio, humilhação ou desrespeito à dignidade no trabalho.</p></div>
     </div>
   </div>
 </section>
