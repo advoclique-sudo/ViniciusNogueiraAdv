@@ -90,13 +90,18 @@ section{padding:84px 0}
 
 /* ---------- Hero (foto de fundo) ---------- */
 /* TROCAR a foto: altere a URL em --hero-img. Foto: Unsplash (licença gratuita) — biblioteca jurídica */
-.hero{--hero-img:url("https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1920&q=75");
+.hero{--hero-img:url("https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&w=2000&q=75");
   position:relative;overflow:hidden;padding:110px 0 0;color:var(--white);
-  background:var(--navy-950) var(--hero-img) center 45%/cover no-repeat}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(0,26,41,.88) 0%,rgba(0,39,61,.78) 50%,rgba(0,26,41,.88) 100%),
+  isolation:isolate;background:var(--navy-950)}
+.hero::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:0;pointer-events:none;
+  height:min(calc(100svh - 70px),100%);aspect-ratio:3/2;
+  background:var(--hero-img) center/cover no-repeat;
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 60%,transparent 100%);
+          mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 60%,transparent 100%)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(90deg,rgba(0,26,41,.93) 0%,rgba(0,39,61,.87) 50%,rgba(0,26,41,.93) 100%),
              linear-gradient(0deg,rgba(0,26,41,.95) 0%,rgba(0,26,41,0) 45%)}
-.hero > *{position:relative}
+.hero > *{position:relative;z-index:2}
 .hero-grid{display:block}
 .hero-copy{max-width:780px;margin:0 auto;padding-bottom:20px;text-align:center}
 .hero-copy .lead{margin-left:auto;margin-right:auto}
@@ -109,8 +114,8 @@ section{padding:84px 0}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 @media (max-width:640px){
   .hero{padding-top:72px}
-  .hero{background-position:62% center}
-  .hero::before{background:linear-gradient(180deg,rgba(0,26,41,.80) 0%,rgba(0,26,41,.86) 55%,rgba(0,26,41,.96) 100%)}
+  .hero::after{height:min(560px,100%);transform:translateX(-62%)}
+  .hero::before{background:linear-gradient(180deg,rgba(0,26,41,.88) 0%,rgba(0,26,41,.92) 55%,rgba(0,26,41,.97) 100%)}
 }
 
 .strip{margin-top:72px;background:rgba(0,26,41,.72);backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.12);color:var(--white)}
