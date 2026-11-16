@@ -145,6 +145,12 @@ section{padding:84px 0}
 .check:has(input:checked){border-color:var(--navy-900);background:#E6ECEF}
 .check strong{display:block;font-size:1rem;color:var(--navy-900)}
 .check small{display:block;color:var(--muted);font-size:.88rem;line-height:1.45;margin-top:2px}
+.check-other,.other-box{grid-column:1/-1}
+.other-box{display:flex;flex-direction:column;gap:8px}
+.other-box[hidden]{display:none}
+.other-box label{font-weight:600;color:var(--navy-900);font-size:.95rem}
+.other-box textarea{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:var(--radius-sm);background:var(--white);font:inherit;font-size:1rem;color:var(--navy-900);resize:vertical;min-height:96px}
+.other-box textarea:focus{outline:3px solid var(--brass);outline-offset:2px;border-color:var(--navy-900)}
 .diag-out{margin-top:28px;padding:24px;border-radius:var(--radius);background:var(--navy-900);color:var(--white);display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
 .diag-out p{max-width:52ch;color:#D3DCE4}
 .diag-out b{color:var(--brass)}
@@ -419,6 +425,11 @@ footer a:hover{color:var(--white)}
       <label class="check"><input type="checkbox" value="Fui demitido e não recebi a rescisão completa"><span class="box"><svg><use href="#i-check"/></svg></span><span><strong>Fui demitido e a rescisão veio errada</strong><small>Valor menor, atrasado, ou parcelado "por acordo".</small></span></label>
       <label class="check"><input type="checkbox" value="Sofria humilhações ou cobranças abusivas"><span class="box"><svg><use href="#i-check"/></svg></span><span><strong>Era humilhado ou pressionado</strong><small>Gritos, exposição na frente dos colegas, metas impossíveis.</small></span></label>
       <label class="check"><input type="checkbox" value="Ainda trabalho lá, mas a empresa não cumpre o que deve"><span class="box"><svg><use href="#i-check"/></svg></span><span><strong>Ainda estou lá, mas não aguento mais</strong><small>A empresa descumpre o contrato e eu não quero pedir demissão e perder direitos.</small></span></label>
+      <label class="check check-other"><input type="checkbox" value="Outros" id="chk-outros"><span class="box"><svg><use href="#i-check"/></svg></span><span><strong>Outros</strong><small>Meu caso é sobre outro assunto. Quero explicar com minhas palavras.</small></span></label>
+      <div class="other-box" id="other-box" hidden>
+        <label for="other-txt">Conte rapidamente o que aconteceu</label>
+        <textarea id="other-txt" rows="3" maxlength="600" placeholder="Ex.: fui afastado e a empresa parou de pagar meu salário..."></textarea>
+      </div>
     </div>
 
     <div class="diag-out reveal">
@@ -608,6 +619,11 @@ document.querySelectorAll(".js-wa").forEach(function(a){
   var boxes = document.querySelectorAll("#checks input");
   var txt = document.getElementById("diag-text");
   var btn = document.getElementById("diag-btn");
+  var otherChk = document.getElementById("chk-outros");
+  var otherBox = document.getElementById("other-box");
+  var otherTxt = document.getElementById("other-txt");
+  otherChk.addEventListener("change", function(){ otherBox.hidden = !otherChk.checked; if(otherChk.checked){ otherTxt.focus(); } });
+  otherTxt.addEventListener("input", function(){ update(); });
   function update(){
     var sel = [].filter.call(boxes, function(b){ return b.checked; }).map(function(b){ return b.value; });
     if(!sel.length){
@@ -616,7 +632,9 @@ document.querySelectorAll(".js-wa").forEach(function(a){
       return;
     }
     txt.innerHTML = "Você marcou <b>" + sel.length + (sel.length>1 ? " situações" : " situação") + "</b> que podem gerar direitos a cobrar. Envie para a equipe e receba uma análise do seu caso.";
-    var msg = "Olá! Fiz o teste no site e marquei:\n- " + sel.join("\n- ") + "\n\nGostaria de uma análise do meu caso.";
+    var outrosTxt = otherTxt.value.trim();
+    var itens = sel.map(function(v){ return (v==="Outros") ? ("Outro assunto" + (outrosTxt ? ": " + outrosTxt : "")) : v; });
+    var msg = "Olá! Fiz o teste no site e marquei:\n- " + itens.join("\n- ") + "\n\nGostaria de uma análise do meu caso.";
     btn.href = waLink(msg); btn.target="_blank"; btn.rel="noopener";
     btn.removeAttribute("aria-disabled"); btn.style.opacity="1";
   }
